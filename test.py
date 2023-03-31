@@ -52,8 +52,25 @@ def test_level_3():
         test_level_3x(i)
 
 
+def test_level_4x(file_id: str | int):
+    rounds = level4(file_id)
+    for result in rounds:
+        print(result)
+        while len(result) > 1:
+            result = tournament_round(result)
+            print(result)
+        assert result == "S"
+
+
+def test_level_4():
+    test_level_4x("example")
+    for i in range(1, 6):
+        test_level_4x(i)
+
+
 if __name__ == "__main__":
-    test_level_0()
-    test_level_1()
-    test_level_2()
-    test_level_3()
+    #test_level_0()
+    #test_level_1()
+    #test_level_2()
+    #test_level_3()
+    test_level_4()

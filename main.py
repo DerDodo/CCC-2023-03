@@ -1,3 +1,5 @@
+import math
+
 from file_management import *
 
 
@@ -49,7 +51,7 @@ def level2(file_id: int | str) -> list[str]:
     return results
 
 
-def fix_game(players: str) -> str:
+def fix_game3(players: str) -> str:
     nums = players.split(" ")
     R, P, S = int(nums[0][:-1]), int(nums[1][:-1]), int(nums[2][:-1])
 
@@ -71,9 +73,59 @@ def level3(file_id: int | str) -> list[str]:
     lines = read_input_lines(3, file_id)
     results = []
     for i in range(1, len(lines)):
-        results.append(fix_game(lines[i]))
+        results.append(fix_game3(lines[i]))
 
     print_result_file_lines(3, file_id, results)
+    # print(results)
+    return results
+
+
+def get_num_rounds(num_players):
+    num_rounds = 0
+    while num_players > 1:
+        num_players //= 2
+        num_rounds += 1
+    return num_rounds - 1
+
+
+def make_PRRR_packets(p, r, full_packet, num_rocks_in_full_packet):
+    result = ""
+    while p > 0 and r >= num_rocks_in_full_packet:
+        result += full_packet
+        p -= 1
+        r -= num_rocks_in_full_packet
+    return result, p, r
+
+
+def fix_game4(players: str) -> str:
+    nums = players.split(" ")
+    R, P, S = int(nums[0][:-1]), int(nums[1][:-1]), int(nums[2][:-1])
+    num_players = R + P + S
+    num_rounds = get_num_rounds(P + R + S)
+    num_rocks_in_full_packet = (2 ** num_rounds) - 1
+    full_packet = "P" + "R" * num_rocks_in_full_packet
+
+    result = ""
+
+    while R > 0 and num_rocks_in_full_packet > 0:
+        result_append, P, R = make_PRRR_packets(P, R, full_packet, num_rocks_in_full_packet)
+        result += result_append
+        num_rocks_in_full_packet = (num_rocks_in_full_packet + 1) // 2 - 1
+        new_packet_length = len(full_packet) // 2
+        full_packet = full_packet[0:new_packet_length]
+
+    result += "P" * P + "R" * R + "S" * S
+    assert len(result) == num_players
+    return result
+
+
+def level4(file_id: int | str) -> list[str]:
+    lines = read_input_lines(4, file_id)
+    results = []
+    for i in range(1, len(lines)):
+        results.append(fix_game4(lines[i]))
+
+    print_result_file_lines(4, file_id, results)
     # print(results)
     return results
 
