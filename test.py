@@ -1,5 +1,5 @@
 from file_management import *
-from main import level1
+from main import *
 
 
 def process_level_0(lines: list[str]) -> int:
@@ -27,6 +27,13 @@ def test_level_1():
     assert result == test
 
 
+def test_level_2():
+    result = "\n".join(level2("example"))
+    test = read_example(2)
+    assert result == test
+
+
 if __name__ == "__main__":
     test_level_0()
     test_level_1()
+    test_level_2()
