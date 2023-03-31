@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ccc-2023-03"
+version = "0.1.0"
+description = ""
+authors = ["Franz B. <franz.buchsbaum@kununu.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+bandit = "^1.7.5"
+black = "^23.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
