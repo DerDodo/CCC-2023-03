@@ -36,12 +36,8 @@ def test_level_2():
 def test_level_3x(file_id: str | int):
     rounds = level3(file_id)
     for result in rounds:
-        # test = read_example(3)
-        print(result)
         result = tournament_round(result)
-        print(result)
         result = tournament_round(result)
-        print(result)
         assert result.count("R") < 1
         assert result.count("S") > 0
 
@@ -55,10 +51,8 @@ def test_level_3():
 def test_level_4x(file_id: str | int):
     rounds = level4(file_id)
     for result in rounds:
-        print(result)
         while len(result) > 1:
             result = tournament_round(result)
-            print(result)
         assert result == "S"
 
 
@@ -68,9 +62,26 @@ def test_level_4():
         test_level_4x(i)
 
 
+def test_level_5x(file_id: str | int):
+    rounds = level5(file_id)
+    for result in rounds:
+        print(result)
+        while len(result) > 1:
+            result = tournament_round(result)
+            print(result)
+        assert result == "S"
+
+
+def test_level_5():
+    test_level_5x("example")
+    for i in range(1, 6):
+        test_level_5x(i)
+
+
 if __name__ == "__main__":
-    #test_level_0()
-    #test_level_1()
-    #test_level_2()
-    #test_level_3()
-    test_level_4()
+    # test_level_0()
+    # test_level_1()
+    # test_level_2()
+    # test_level_3()
+    # test_level_4()
+    test_level_5()

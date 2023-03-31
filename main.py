@@ -1,22 +1,36 @@
-import math
-
 from file_management import *
 
 
 def get_winner(text: str) -> str:
     match "".join(sorted(text)):
-        # PRS
+        # LPRSY
+        case "LL":
+            return "L"
+        case "LP":
+            return "L"
+        case "LR":
+            return "R"
+        case "LS":
+            return "S"
+        case "LY":
+            return "L"
         case "PP":
             return "P"
         case "PR":
             return "P"
         case "PS":
             return "S"
+        case "PY":
+            return "P"
         case "RR":
             return "R"
         case "RS":
             return "R"
+        case "RY":
+            return "Y"
         case "SS":
+            return "S"
+        case "SY":
             return "S"
         case _:
             raise ValueError
@@ -102,19 +116,41 @@ def fix_game4(players: str) -> str:
     R, P, S = int(nums[0][:-1]), int(nums[1][:-1]), int(nums[2][:-1])
     num_players = R + P + S
     num_rounds = get_num_rounds(P + R + S)
-    num_rocks_in_full_packet = (2 ** num_rounds) - 1
+    num_rocks_in_full_packet = (2**num_rounds) - 1
     full_packet = "P" + "R" * num_rocks_in_full_packet
 
     result = ""
 
     while R > 0 and num_rocks_in_full_packet > 0:
-        result_append, P, R = make_PRRR_packets(P, R, full_packet, num_rocks_in_full_packet)
+        result_append, P, R = make_PRRR_packets(
+            P, R, full_packet, num_rocks_in_full_packet
+        )
         result += result_append
         num_rocks_in_full_packet = (num_rocks_in_full_packet + 1) // 2 - 1
         new_packet_length = len(full_packet) // 2
         full_packet = full_packet[0:new_packet_length]
 
     result += "P" * P + "R" * R + "S" * S
+    assert len(result) == num_players
+    return result
+
+
+def fix_game5(players: str) -> str:
+    nums = players.split(" ")
+    R, P, S, Y, L = (
+        int(nums[0][:-1]),
+        int(nums[1][:-1]),
+        int(nums[2][:-1]),
+        int(nums[3][:-1]),
+        int(nums[4][:-1]),
+    )
+
+    num_players = R + P + S + Y + L
+    num_rounds = get_num_rounds(num_players)
+    result = ""
+
+    result += "P" * P + "R" * R + "Y" * Y + "L" * L + "S" * S
+    print(result)
     assert len(result) == num_players
     return result
 
@@ -126,7 +162,16 @@ def level4(file_id: int | str) -> list[str]:
         results.append(fix_game4(lines[i]))
 
     print_result_file_lines(4, file_id, results)
-    # print(results)
+    return results
+
+
+def level5(file_id: int | str) -> list[str]:
+    lines = read_input_lines(5, file_id)
+    results = []
+    for i in range(5, len(lines)):
+        results.append(fix_game5(lines[i]))
+
+    print_result_file_lines(5, file_id, results)
     return results
 
 
