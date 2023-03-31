@@ -1,4 +1,4 @@
-from file_management import read_input_lines, read_input_text, read_example
+from file_management import read_input_lines, read_input_text, read_example, print_result_file_lines
 
 
 def process_level_0(lines: list[str]) -> int:
@@ -16,6 +16,7 @@ def test_level_0():
     lines = read_input_lines(0, "example")
     result = process_level_0(lines)
     test = read_example(0)
+    print_result_file_lines(0, "example", [str(result)])
     assert result == int(test)
 
 
