@@ -27,4 +27,5 @@ def level1(file_id: int | str):
 
 
 if __name__ == "__main__":
-    level1()
+    for sub in range(1, 6):
+        level1(sub)
