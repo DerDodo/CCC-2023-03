@@ -1,11 +1,11 @@
-from file_management import read_input_lines, print_result_lines
+from file_management import *
 
 
 def level1(file_id: int | str):
     lines = read_input_lines(1, file_id)
     results = []
-    for i in range(int(lines[0]) - 1):
-        match "".join(sorted(lines[i + 1].strip())):
+    for i in range(int(lines[0])):
+        match "".join(sorted(lines[i + 1])):
             # PRS
             case "PP":
                 results += "P"
@@ -22,7 +22,7 @@ def level1(file_id: int | str):
             case _:
                 raise ValueError
 
-    print_result_lines(1, file_id, results)
+    print_result_file_lines(1, file_id, results)
     return results
 
 

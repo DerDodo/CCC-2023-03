@@ -1,4 +1,5 @@
-from file_management import read_input_lines, read_input_text, read_example, print_result_file_lines
+from file_management import *
+from main import level1
 
 
 def process_level_0(lines: list[str]) -> int:
@@ -20,5 +21,12 @@ def test_level_0():
     assert result == int(test)
 
 
-if __name__ == '__main__':
+def test_level_1():
+    result = "\n".join(level1("example"))
+    test = read_example(1)
+    assert result == test
+
+
+if __name__ == "__main__":
     test_level_0()
+    test_level_1()
