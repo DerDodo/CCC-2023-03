@@ -33,15 +33,23 @@ def test_level_2():
     assert result == test
 
 
+def test_level_3x(file_id: str | int):
+    rounds = level3(file_id)
+    for result in rounds:
+        # test = read_example(3)
+        print(result)
+        result = tournament_round(result)
+        print(result)
+        result = tournament_round(result)
+        print(result)
+        assert result.count("R") < 1
+        assert result.count("S") > 0
+
+
 def test_level_3():
-    result = "\n".join(level3("example"))
-    # test = read_example(3)
-    print(result)
-    result = tournament_round(result)
-    print(result)
-    result = tournament_round(result)
-    print(result)
-    assert result.count("R") < 1
+    test_level_3x("example")
+    for i in range(1, 6):
+        test_level_3x(i)
 
 
 if __name__ == "__main__":
