@@ -51,7 +51,7 @@ def level2(file_id: int | str) -> list[str]:
 
 def fix_game(players: str) -> str:
     nums = players.split(" ")
-    R, P, S = int(nums[0][0]), int(nums[1][0]), int(nums[2][0])
+    R, P, S = int(nums[0][:-1]), int(nums[1][:-1]), int(nums[2][:-1])
 
     result = ""
 
