@@ -2,7 +2,14 @@ from read_input import read_input_lines, read_input_text
 
 
 def process_level_0(lines: list[str]) -> int:
-    return 0
+    min_val = 100000000
+    min_i = 0
+    for i in range(1, len(lines)):
+        val = int(lines[i])
+        if val < min_val:
+            min_val = val
+            min_i = i
+    return min_i - 1
 
 
 def test_level_0():
