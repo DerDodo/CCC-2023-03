@@ -33,7 +33,19 @@ def test_level_2():
     assert result == test
 
 
+def test_level_3():
+    result = "\n".join(level3("example"))
+    # test = read_example(3)
+    print(result)
+    result = tournament_round(result)
+    print(result)
+    result = tournament_round(result)
+    print(result)
+    assert result.count("R") < 1
+
+
 if __name__ == "__main__":
     test_level_0()
     test_level_1()
     test_level_2()
+    test_level_3()
